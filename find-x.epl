@@ -13,25 +13,19 @@ function main { verify();}
 
 function verify {
    
-    u[2] = m[0];
-    u[1]=0;
-	//2x+4=10  
-    if((u[2]<10) && ((u[2]+u[2]+4)==10)){
-		u[3]=u[2];
-		u[1]=1;
-	}
-    // Bounty Is Rewarded when got the answer of this equation
-	//想要的结果是一个简单的一元一次方程，x
-	verify_bty ((u[1]==1) && ((u[2]+u[2]+4)==10));
+    u[2] = m[0]& 0x0f;
+    //u[2] = m[0]& 0x0f;    //使用这个命令，要配合同样的回调文件。会加快找到答案的速度
     
-	//不用理会这个
+    //结果校验   
+    verify_bty ((u[2]<10)&&((u[2]+u[2]+4)==10));
+    
+    //不用理会这个
     // some randomness for POW function
     u[57] = m[1];
     u[56] = m[2];
     u[55] = m[3];
     u[54] = m[4];
-
-
-	// POW Is Rewarded When The MD5 Hash Of h7, h6, h5 & h4 Is Less Than Target
-	verify_pow (u[57], u[56], u[55], u[54]);
+    
+    // POW Is Rewarded When The MD5 Hash Of h7, h6, h5 & h4 Is Less Than Target
+    verify_pow (u[57], u[56], u[55], u[54]);
 }
